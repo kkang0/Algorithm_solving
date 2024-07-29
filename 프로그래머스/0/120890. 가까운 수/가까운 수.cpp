@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include <cmath> // abs 함수 사용을 위해 추가
+#include <cmath>
 
 using namespace std;
 
