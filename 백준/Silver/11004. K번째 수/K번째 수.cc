@@ -1,20 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <queue>
 using namespace std;
 
-int main(void) {
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     int N, K;
     cin >> N >> K;
 
-    vector<int> v(N);
+    priority_queue<int, vector<int>, greater<int>> pq;
     for(int i = 0; i < N; i++) {
-        scanf("%d", &v[i]);
+        int num;
+        cin >> num;
+        pq.push(num);
     }
 
-    sort(v.begin(), v.end());
-
-    cout << v[K - 1] << '\n';
+    for(int i = 0; i < K - 1; i++) pq.pop();
+    cout << pq.top() << endl;
 
     return 0;
 }
