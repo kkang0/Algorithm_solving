@@ -1,6 +1,7 @@
 #include <iostream>
-#include <list>
+#include <stack>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 int main(void) {
@@ -10,36 +11,49 @@ int main(void) {
     int N;
     cin >> N;
 
-    list<char> editor(s.begin(), s.end());
-    auto cursor = editor.end();
+    stack<char> ls, rs;
+    for(char c: s) ls.push(c);
 
-    for (int i = 0; i < N; i++) {
+    for(int i = 0; i < N; i++) {
         char command;
         cin >> command;
 
-        if (command == 'L') {
-            if (cursor != editor.begin()) {
-                --cursor;
+        if(command == 'L') {
+            if(!ls.empty()) {
+                rs.push(ls.top());
+                ls.pop();
             }
-        } else if (command == 'D') {
-            if (cursor != editor.end()) {
-                ++cursor;
+        } else if(command == 'D') {
+            if(!rs.empty()) {
+                ls.push(rs.top());
+                rs.pop();
             }
-        } else if (command == 'P') {
+        } else if(command == 'P') {
             char to_insert;
             cin >> to_insert;
-            editor.insert(cursor, to_insert);
-        } else if (command == 'B') {
-            if(cursor != editor.begin()) {
-                cursor = editor.erase(prev(cursor));
+
+            ls.push(to_insert);
+        } else if(command == 'B') {
+            if(!ls.empty()) {
+                ls.pop();
             }
         }
     }
-
-    for (char c : editor) {
-        cout << c;
+    
+    string result;
+    while(!ls.empty()) {
+        result.push_back(ls.top());
+        ls.pop();
     }
-    cout << endl;
+
+    reverse(result.begin(), result.end());
+
+    while(!rs.empty()) {
+        result.push_back(rs.top());
+        rs.pop();
+    }
+
+    cout << result << endl;
 
     return 0;
 }
