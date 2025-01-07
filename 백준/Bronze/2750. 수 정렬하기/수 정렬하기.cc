@@ -6,17 +6,15 @@ using namespace std;
 int main(void) {
     int N;
     cin >> N;
-    vector<int> arr(N);
-
+    
+    vector<int> v(N);
     for(int i = 0; i < N; i++) {
-        cin >> arr[i];
+        cin >> v[i];
     }
 
-    sort(arr.begin(), arr.end());
+    sort(v.begin(), v.end());
 
-    for(int i = 0; i < N; i++) {
-        cout << arr[i] << endl;
-    }
+    for(int i = 0; i < N; i++) cout << v[i] << '\n';
     
     return 0;
 }
