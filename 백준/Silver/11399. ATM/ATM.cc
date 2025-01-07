@@ -14,19 +14,12 @@ int main(void) {
 
     sort(order, order + N);
 
-    int result[1000];
-    int sum = 0;
+    int result = 0;
     for(int i = 0; i < N; i++) {
-        sum += order[i];
-        result[i] = sum;
+        result += order[i] * (N - i);
     }
 
-    int answer = 0;
-    for(int i = 0; i < N; i++) {
-        answer += result[i];
-    }
-
-    cout << answer << endl;
+    cout << result << endl;
 
     return 0;
 }
