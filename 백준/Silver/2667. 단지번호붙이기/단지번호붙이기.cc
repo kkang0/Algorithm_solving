@@ -1,84 +1,53 @@
 #include <iostream>
-#include <string>
-#include <queue>
 #include <vector>
 #include <algorithm>
-#define endl '\n'
 using namespace std;
+
 int N;
+int map[26][26];
+bool visited[26][26];
 int dx[4] = {1, -1, 0, 0};
 int dy[4] = {0, 0, 1, -1};
-int board[26][26];
-bool visited[26][26];
+vector<int> result;
 
-void init() {
+int dfs(int x, int y) {
+    int cnt = 1;
+    visited[x][y] = true;
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+        if (visited[nx][ny] || map[nx][ny] != 1) continue;
+        cnt += dfs(nx, ny);
+    }
+    return cnt;
+}
+
+int main() {
     cin >> N;
-    for (int i = 1; i <= N; i++) {
-        string s;
-        cin >> s;
-        for (int j = 1; j <= N; j++) {
-            board[i][j] = s[j - 1] - '0';
-        }
-    }
-}
 
-void printboard() {
-    for (int i = 1; i <= N; i++) {
-        for (int j = 1; j <= N; j++) {
-            cout << board[i][j] << ' ';
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
-
-int bfs(int sx, int sy) {
-    int ret = 0;
-    queue<pair<int, int>> q;
-    q.push({sx, sy});
-    visited[sx][sy] = true;
-
-    while(!q.empty()){
-        int x = q.front().first;
-        int y = q.front().second;
-        q.pop();
-        ret++;
-        
-        for(int k = 0; k < 4; k++){
-            int nx = x + dx[k];
-            int ny = y + dy[k];
-
-            if(nx < 1 || ny < 1 || nx > N || ny > N) continue;
-            if(visited[nx][ny]) continue;
-            if(board[nx][ny] == 0) continue;
-            q.push({nx, ny});
-            visited[nx][ny] = true;
-
-        }
-    }
-    return ret;
-}
-
-int main(void) {
-    init();
-    // printboard();
-    vector<int> ans;
-    for(int i = 1; i <= N; i++){
-        for(int j = 1; j <= N; j++){
-            if(visited[i][j]) continue;
-            if(board[i][j] == 0) continue;
-            int count = bfs(i, j);
-            ans.push_back(count);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            scanf("%1d", &map[i][j]);
         }
     }
 
-    sort(ans.begin(), ans.end());
-
-    cout << ans.size() << endl;
-    for(int i = 0; i < ans.size(); i++){
-        cout << ans[i] << endl;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (!visited[i][j] && map[i][j] == 1) {
+                int cnt = dfs(i, j);
+                result.push_back(cnt);
+            }
+        }
     }
 
+    sort(result.begin(), result.end());
+
+    cout << result.size() << endl;
+    for (int n : result) {
+        cout << n << '\n';
+    }
 
     return 0;
 }
