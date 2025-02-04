@@ -1,10 +1,10 @@
 # [level 0] 세로 읽기 - 181904 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181904) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181904?language=java) 
 
 ### 성능 요약
 
-메모리: 4.17 MB, 시간: 0.03 ms
+메모리: 75.8 MB, 시간: 14.95 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 07월 22일 14:42:45
+2025년 02월 04일 23:28:47
 
 ### 문제 설명
 
@@ -65,7 +65,8 @@
 <p>입출력 예 #1</p>
 
 <ul>
-<li><p>예제 1번의 <code>my_string</code>을 한 줄에 4 글자씩 쓰면 다음의 표와 같습니다.</p>
+<li>예제 1번의 <code>my_string</code>을 한 줄에 4 글자씩 쓰면 다음의 표와 같습니다.</li>
+</ul>
 <table class="table">
         <thead><tr>
 <th>1열</th>
@@ -105,10 +106,8 @@
 <td>c</td>
 </tr>
 </tbody>
-      </table>
-<p>2열에 적힌 글자를 세로로 읽으면 happy이므로 "happy"를 return 합니다.</p></li>
-</ul>
-
+      </table><div class="highlight"><pre class="codehilite"><code>2열에 적힌 글자를 세로로 읽으면 happy이므로 "happy"를 return 합니다.
+</code></pre></div>
 <p>입출력 예 #2</p>
 
 <ul>
