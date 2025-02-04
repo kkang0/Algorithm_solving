@@ -1,10 +1,10 @@
 # [level 0] 두 수의 연산값 비교하기 - 181938 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181938?language=cpp) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181938?language=java) 
 
 ### 성능 요약
 
-메모리: 4.02 MB, 시간: 0.02 ms
+메모리: 88.6 MB, 시간: 12.66 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 07월 17일 19:19:06
+2025년 02월 04일 17:27:24
 
 ### 문제 설명
 
