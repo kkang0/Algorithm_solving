@@ -1,10 +1,10 @@
 # [level 0] 문자열 여러 번 뒤집기 - 181913 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181913?language=cpp) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181913?language=java) 
 
 ### 성능 요약
 
-메모리: 3.81 MB, 시간: 0.23 ms
+메모리: 91.3 MB, 시간: 3.05 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 07월 23일 22:38:51
+2025년 02월 04일 22:31:14
 
 ### 문제 설명
 
@@ -55,7 +55,8 @@
 <h5>입출력 예 설명</h5>
 
 <ul>
-<li><p>예제 1번의 <code>my_string</code>은 "rermgorpsam"이고 주어진 <code>queries</code>를 순서대로 처리하면 다음과 같습니다.</p>
+<li>예제 1번의 <code>my_string</code>은 "rermgorpsam"이고 주어진 <code>queries</code>를 순서대로 처리하면 다음과 같습니다.</li>
+</ul>
 <table class="table">
         <thead><tr>
 <th>queries</th>
@@ -83,9 +84,7 @@
 <td>"programmers"</td>
 </tr>
 </tbody>
-      </table>
-<p>따라서 "programmers"를 return 합니다.</p></li>
-</ul>
-
+      </table><div class="highlight"><pre class="codehilite"><code>따라서 "programmers"를 return 합니다.
+</code></pre></div>
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
