@@ -4,26 +4,47 @@
 using namespace std;
 
 int main(void) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
     int N, M;
     cin >> N >> M;
 
-    vector<int> v;
+    vector<int> A(N), B(M);
+    
     for(int i = 0; i < N; i++) {
-        int a;
-        cin >> a;
-        v.push_back(a);
+        cin >> A[i];
     }
-
+    
     for(int i = 0; i < M; i++) {
-        int b;
-        cin >> b;
-        v.push_back(b);
+        cin >> B[i];
     }
 
-    sort(v.begin(), v.end());
+    int i = 0, j = 0;
+    vector<int> result;
+    
+    while (i < N && j < M) {
+        if (A[i] < B[j]) {
+            result.push_back(A[i]);
+            i++;
+        } else {
+            result.push_back(B[j]);
+            j++;
+        }
+    }
 
-    for(int i = 0; i < v.size(); i++) {
-        cout << v[i] << " ";
+    while (i < N) {
+        result.push_back(A[i]);
+        i++;
+    }
+
+    while (j < M) {
+        result.push_back(B[j]);
+        j++;
+    }
+
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << " ";
     }
     cout << endl;
 
