@@ -4,6 +4,9 @@
 using namespace std;
 
 int main(void) {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
     int N, K, M;
     cin >> N >> K >> M;
 
@@ -21,7 +24,6 @@ int main(void) {
         cout << -1 << '\n';
         return 0;
     }
-
 
     int left = 1;
     int right = *max_element(kimbap.begin(), kimbap.end());
