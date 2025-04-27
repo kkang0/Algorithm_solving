@@ -3,10 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-bool compare(pair<int, int> a, pair<int, int> b) {
-    return a.first < b.first;
-}
-
 int main(void) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -21,7 +17,9 @@ int main(void) {
         v.push_back({L, H});
     }
 
-    sort(v.begin(), v.end(), compare);
+    sort(v.begin(), v.end(), [](pair<int, int> a, pair<int, int> b) {
+        return a.first < b.first;
+    });
 
     auto it = max_element(v.begin(), v.end(), [](pair<int, int> a, pair<int, int> b) {
         return a.second < b.second;
