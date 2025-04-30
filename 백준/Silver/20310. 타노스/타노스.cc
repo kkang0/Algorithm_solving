@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main(void) {
@@ -15,10 +16,26 @@ int main(void) {
         else if(c == '1') c1++;
     }
 
-    string str(c0 / 2, '0');
-    str += string(c1 / 2, '1');
+    c0 /= 2;
+    c1 /= 2;
 
-    cout << str << "\n";
+    while(c0 > 0) {
+        int lastIdx0 = S.rfind('0');
+        if(lastIdx0 != string::npos) {
+            S.erase(lastIdx0, 1);
+            c0--;
+        }
+    }
+
+    while(c1 > 0) {
+        int firstIdx1 = S.find('1');
+        if(firstIdx1 != string::npos) {
+            S.erase(firstIdx1, 1);
+            c1--;
+        }   
+    }
+
+    cout << S << "\n";
 
     return 0;
 }
