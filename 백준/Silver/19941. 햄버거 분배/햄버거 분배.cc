@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main(void) {
@@ -9,30 +8,17 @@ int main(void) {
     int N, K;
     cin >> N >> K;
 
-    string s;
-    cin >> s;
-
-    vector<bool> eaten(N, false);
+    char ham[20001];
+    cin >> ham;
+    
     int result = 0;
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] == 'P') {
-            bool flag = false;
-            for(int j = max(0, i - K); j < i; j++) {
-                if(s[j] == 'H' && !eaten[j]) {
-                    eaten[j] = true;
-                    flag = true;
+    for(int i = 0; i < N; i++) {
+        if(ham[i] == 'P') {
+            for(int j = i - K; j <= i + K; j++) {
+                if(j >= 0 && j < N && ham[j] == 'H') {
                     result++;
+                    ham[j] = 'X';
                     break;
-                }
-            }
-
-            if(!flag) {
-                for(int j = i + 1; j <= min(N - 1, i + K); j++) {
-                    if(s[j] == 'H' && !eaten[j]) {
-                        eaten[j] = true;
-                        result++;
-                        break;
-                    }
                 }
             }
         }
