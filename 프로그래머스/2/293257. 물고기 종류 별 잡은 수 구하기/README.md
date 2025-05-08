@@ -1,6 +1,6 @@
 # [level 2] 물고기 종류 별 잡은 수 구하기 - 293257 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/293257#qna) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/293257) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 10월 20일 21:40:33
+2025년 05월 08일 15:47:27
 
 ### 문제 설명
 
