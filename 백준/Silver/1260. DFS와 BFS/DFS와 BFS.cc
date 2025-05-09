@@ -1,68 +1,65 @@
-// DFS와 BFS
 #include <iostream>
 #include <vector>
-#include <queue>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
-vector<int> edges[1005];
+int N, M, V;
+vector<int> graph[1001];
+bool visited[1001];
 
-bool vis[1005] = { 0, };
+void dfs(int start) {
+    cout << start << " ";
+    visited[start] = true;
 
-void dfs(int cur) {
-    if (vis[cur]) return;
-    vis[cur] = 1;   // already visited
-    cout << cur << ' ';     // print visited
-    for (int& nxt: edges[cur]) {    // vector의 cur에 속하는 모든 정점 방문
-        if (vis[nxt])
-            continue;
-        dfs(nxt);
-    }
-}
-
-void bfs(int start) {
-    for (int i = 0; i <= 1000; ++i) {
-        vis[i] = 0;
-    }
-    queue<int> q;
-
-    vis[start] = 1;
-    q.push(start);
-
-    while (!q.empty()) {
-        int cur = q.front();
-        cout << cur << ' ';
-        q.pop();
-
-        for(int& nxt: edges[cur]) {
-            if (vis[nxt])
-                continue;
-            vis[nxt] = true;
-            q.push(nxt);
+    for(int next: graph[start]) {
+        if(!visited[next]) {
+            dfs(next);
         }
     }
 }
 
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    int N, M, V, u, v;
-    cin >> N >> M >> V;
+void bfs(int start) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
 
+    while(!q.empty()) {
+        int cur = q.front();
+        cout << cur << " ";
+        q.pop();
+
+        for(int next: graph[cur]) {
+            if(!visited[next]) {
+                visited[next] = true;
+                q.push(next);
+            }
+        }
+    }
+}
+
+int main(void) {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    cin >> N >> M >> V;
     for(int i = 0; i < M; i++) {
-        cin >> u >> v;
-        edges[u].push_back(v);
-        edges[v].push_back(u);
+        int from, to;
+        cin >> from >> to;
+
+        graph[from].push_back(to);
+        graph[to].push_back(from);
     }
 
-    for (int i = 1; i <= N; i++) {
-        sort(edges[i].begin(), edges[i].end());
+    for(int i = 1; i <= N; i++) {
+        sort(graph[i].begin(), graph[i].end());
     }
 
     dfs(V);
-    cout << '\n';
+    fill(visited, visited + 1001, 0);
+    cout << "\n";
     bfs(V);
-    
+    cout << "\n";
+
     return 0;
 }
