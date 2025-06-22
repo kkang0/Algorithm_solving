@@ -1,45 +1,52 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
 using namespace std;
 
 int L, C;
-char alphabet[16];
+vector<char> alpha;
+vector<char> tmp;
 
-bool check(string s) {
-    int vowels = 0;
-    int consonants = 0;
-    for (char c : s) {
-        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
-            vowels++;
-        } else {
-            consonants++;
-        }
+bool check(vector<char> t) {
+    int vo = 0;
+    int co = 0;
+    for(char c: t) {
+        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') vo++;
+        else co++;
     }
-    return vowels >= 1 && consonants >= 2;
+
+    return vo >= 1 && co >= 2;
 }
 
-void dfs(int idx, string s) {
-    if (s.length() == L) {
-        if (check(s)) {
-            cout << s << endl;
+void password(int idx) {
+    if(tmp.size() == L) {
+        if(check(tmp)) {
+            for(int i = 0; i < tmp.size(); i++) cout << tmp[i];
+            cout << '\n';
         }
         return;
     }
 
-    for (int i = idx; i < C; i++) {
-        dfs(i + 1, s + alphabet[i]);
+    for(int i = idx; i < C; i++) {
+        tmp.push_back(alpha[i]);
+        password(i + 1);
+        tmp.pop_back();
     }
 }
 
 int main(void) {
-    cin >> L >> C;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    for (int i = 0; i < C; i++) {
-        cin >> alphabet[i];
+    cin >> L >> C;
+    alpha.resize(C);
+    for(int i = 0; i < C; i++) {
+        cin >> alpha[i];
     }
 
-    sort(alphabet, alphabet + C);
-    dfs(0, "");
+    sort(alpha.begin(), alpha.end());
+
+    password(0);
 
     return 0;
 }
