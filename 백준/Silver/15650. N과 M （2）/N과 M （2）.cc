@@ -14,10 +14,8 @@ void dfs(int num, int cnt) {
     }
 
     for(int i = num; i <= N; i++) {
-        visited[num] = true;
         nums[cnt] = i;
         dfs(i + 1, cnt + 1);
-        visited[num]= false;
     }
 }
 
