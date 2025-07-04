@@ -14,6 +14,7 @@ void dfs(int cnt) {
     }
 
     for(int i = 0; i < N; i++) {
+        if(i > 0 && nums[i] == nums[i - 1]) continue;
         tmp[cnt] = nums[i];
         dfs(cnt + 1);
     }
@@ -22,7 +23,7 @@ void dfs(int cnt) {
 int main(void) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    
+
     cin >> N >> M;
     for(int i = 0; i < N; i++) {
         cin >> nums[i];
