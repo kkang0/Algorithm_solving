@@ -4,42 +4,41 @@
 using namespace std;
 
 int N, M;
+vector<int> graph[32001];
 vector<int> indegree;
 vector<int> result;
-vector<vector<int>> graph;
 
 int main(void) {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     cin >> N >> M;
-
-    indegree.assign(N + 1, 0);
-    graph.assign(N + 1, vector<int>());
-
-    for (int i = 0; i < M; i++) {
-        int A, B;
-        cin >> A >> B;
-
-        graph[A].push_back(B);
-        indegree[B]++;
+    indegree.resize(N + 1, 0);
+    for(int i = 0; i < M; i++) {
+        int a, b;
+        cin >> a >> b;
+        graph[a].push_back(b);
+        indegree[b]++;
     }
 
     queue<int> q;
-    for (int i = 1; i <= N; i++) {
-        if (indegree[i] == 0) q.push(i);
+    for(int i = 1; i <= N; i++) {
+        if(indegree[i] == 0) q.push(i);
     }
 
-    while (!q.empty()) {
-        int cur = q.front();
+    while(!q.empty()) {
+        int n = q.front();
         q.pop();
-        result.push_back(cur);
-
-        for (int next : graph[cur]) {
-            if (--indegree[next] == 0) {
-                q.push(next);
-            }
+        
+        result.push_back(n);
+        for(int i = 0; i < graph[n].size(); i++) {
+            int m = graph[n][i];
+            if(--indegree[m] == 0) q.push(m);
         }
     }
 
-    for (int node : result) cout << node << " ";
+    for(int r: result) cout << r << ' ';
+    cout << '\n';
 
     return 0;
 }
