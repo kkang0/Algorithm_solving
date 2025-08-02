@@ -1,40 +1,42 @@
 #include <iostream>
-#include <climits>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-long long K, N, result;
-long long lan[10001];
-
 int main(void) {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int K, N;
     cin >> K >> N;
 
-    long long max_num = INT_MAX;
+    vector<int> lan;
+    lan.resize(K);
+    int max_lan = 0;
     for(int i = 0; i < K; i++) {
         cin >> lan[i];
-        max_num = max(max_num, lan[i]);
+        max_lan = max(max_lan, lan[i]);
     }
 
-    long long left = 1;
-    long long right = max_num;
-    long long mid;
-
-    while(left <= right) {
-        mid = (left + right) / 2;
+    long long start = 1;
+    long long end = max_lan;
+    long long result = 0;
+    while(start <= end) {
+        long long mid = (start + end) / 2;
 
         long long sum = 0;
         for(int i = 0; i < K; i++) {
-            sum += lan[i] / mid;
+            sum += (lan[i] / mid);
         }
 
         if(sum >= N) {
-            left = mid + 1;
-            result = max(result, mid);
-        } else {
-            right = mid - 1;
+            result = mid;
+            start = mid + 1;
         }
+        else end = mid - 1;
     }
 
-    cout << right << endl;
+    cout << result << '\n';
 
     return 0;
 }
