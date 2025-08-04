@@ -1,35 +1,39 @@
 #include <iostream>
+#include <vector>
 #include <cmath>
 using namespace std;
 
-int col[16];
-int N;
-int result;
+int N, cnt;
+int board[15];
 
-void nqueen(int x) {
-    if(x == N) result++;
-    else {
-        for(int i = 0; i < N; i++) {
-            col[x] = i;
-            bool flag = true;
-            for(int j = 0; j < x; j++) {
-                if(col[x] == col[j] || abs(col[x] - col[j]) == x - j) {
-                    flag = false;
-                    break;
-                }
-            }
+bool check(int row, int col) {
+    for(int i = 0; i < row; i++) {
+        if(board[i] == col || abs(board[i] - col) == row - i) return false;
+    }
+    return true;
+}
 
-            if(flag) nqueen(x + 1);
+void nqueen(int row) {
+    if(row == N) {
+        cnt++;
+        return;
+    }
+
+    for(int i = 0; i < N; i++) {
+        if(check(row, i)) {
+            board[row] = i;
+            nqueen(row + 1);
         }
     }
 }
 
 int main(void) {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     cin >> N;
-
     nqueen(0);
-
-    cout << result << endl;
+    cout << cnt << '\n';
 
     return 0;
 }
