@@ -1,8 +1,7 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
 using namespace std;
-
-int arr[1001];
 
 int main(void) {
     ios::sync_with_stdio(false);
@@ -11,37 +10,38 @@ int main(void) {
     int N;
     cin >> N;
 
-    int max_h = 0;
+    vector<int> arr;
+    arr.resize(1001, 0);
+
+    int max_height = 0;
     int max_pos = 0;
-
     for(int i = 0; i < N; i++) {
-        int L, H;
-        cin >> L >> H;
+        int p, h;
+        cin >> p >> h;
 
-        arr[L] = H;
-
-        if(max_h < H) {
-            max_h = H;
-            max_pos = L;
+        arr[p] = h;
+        
+        if(max_height < h) {
+            max_height = h;
+            max_pos = p;
         }
     }
 
-    int result = 0;
     int lh = 0;
-    for(int i = 1; i < max_pos; i++) {
+    int sum = 0;
+    for(int i = 1; i <= max_pos; i++) {
         lh = max(lh, arr[i]);
-        result += lh;
+        sum += lh;
     }
 
+    int size = arr.size();
     int rh = 0;
     for(int i = 1000; i > max_pos; i--) {
         rh = max(rh, arr[i]);
-        result += rh;
+        sum += rh;
     }
 
-    result += max_h;
-
-    cout << result << '\n';
+    cout << sum << '\n';
 
     return 0;
 }
