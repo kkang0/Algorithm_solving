@@ -1,41 +1,41 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
-int N, H;
-vector<int> bottom;
-vector<int> top;
+const int INF = 1e9;
+int bottom[500001];
+int top[500001];
 
 int main(void) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    int N, H;
     cin >> N >> H;
+    
     for(int i = 0; i < N; i++) {
         int h;
         cin >> h;
-        if(i % 2 == 0) bottom.push_back(h);
-        else top.push_back(h);
+        if(i % 2 == 0) bottom[h]++;
+        else top[h]++;
     }
 
-    sort(bottom.begin(), bottom.end());
-    sort(top.begin(), top.end());
-
-    int min = N;
-    int result = 0;
-    for(int h = 1; h <= H; h++) {
-        int cb = bottom.end() - lower_bound(bottom.begin(), bottom.end(), h);
-        int ct = top.end() - lower_bound(top.begin(), top.end(), H - h + 1);
-
-        int total = cb + ct;
-        if(total < min) {
-            min = total;
-            result = 1;
-        } else if(total == min) result++;
+    for(int i = H-1; i >= 1; i--) {
+        bottom[i] += bottom[i + 1];
+        top[i] += top[i + 1];
     }
 
-    cout << min << ' ' << result << '\n';
+    int min_c = INF;
+    int cnt = 0;
+    for(int i = 1; i <= H; i++) {
+        int c = bottom[i] + top[H - i + 1];
+        if(c < min_c) {
+            min_c = c;
+            cnt = 1;
+        } else if(c == min_c) {
+            cnt++;
+        }
+    }
 
+    cout << min_c << ' ' << cnt << '\n';
     return 0;
 }
