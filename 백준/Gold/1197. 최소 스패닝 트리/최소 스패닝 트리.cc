@@ -3,12 +3,13 @@
 #include <algorithm>
 using namespace std;
 
+int V, E;
 vector<pair<int, pair<int, int>>> graph;
 int parent[10001];
 
-int findParent(int v) {
-    if(parent[v] == v) return v;
-    return parent[v] = findParent(parent[v]);
+int findParent(int x) {
+    if(parent[x] == x) return x;
+    return parent[x] = findParent(parent[x]);
 }
 
 void unionParent(int a, int b) {
@@ -21,21 +22,19 @@ int main(void) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int V, E;
     cin >> V >> E;
-
     for(int i = 0; i < E; i++) {
         int A, B, C;
         cin >> A >> B >> C;
         graph.push_back({C, {A, B}});
     }
+
     sort(graph.begin(), graph.end());
 
     for(int i = 1; i <= V; i++) parent[i] = i;
 
     int result = 0;
-    int edgeCount = 0;
-
+    int edgecnt = 0;
     for(int i = 0; i < graph.size(); i++) {
         int cost = graph[i].first;
         int cur = graph[i].second.first;
@@ -45,9 +44,9 @@ int main(void) {
 
         unionParent(cur, next);
         result += cost;
-        edgeCount++;
+        edgecnt++;
 
-        if(edgeCount == V - 1) break;
+        if(edgecnt == V - 1) break;
     }
 
     cout << result << '\n';
